@@ -130,7 +130,11 @@ object Main extends App {
 
   val outputDir = Paths.get("target/site")
   Files.createDirectories(outputDir)
-  Files.copy(Paths.get("resources", "style.css"), Paths.get(outputDir.toString, "style.css"), StandardCopyOption.REPLACE_EXISTING)
+  Seq("style.css", ".htaccess").foreach(file =>
+    Files.copy(
+      Paths.get("resources", file),
+      Paths.get(outputDir.toString, file),
+      StandardCopyOption.REPLACE_EXISTING))
 
   printList(outputDir, events)
 }
