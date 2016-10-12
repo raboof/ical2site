@@ -107,7 +107,7 @@ object Main extends App {
                     body(style:="font-family: 'Raleway', sans-serif")(
                       div(cls:="heading")(
                         div(cls:="title")(style:="font-family: 'Lobster Two', cursive; font-size: 62px")("Deventer.live"),
-                        div(cls:="subtitle")("Concerten en andere activiteiten in Deventer")
+                        div(cls:="subtitle")("Concerten en activiteiten in Deventer")
                       ),
                       eventListHtml(events)
                     )
