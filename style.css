@@ -1,0 +1,47 @@
+body {
+  margin: 2em;
+}
+
+.title {
+  font-family: 'Lobster Two', cursive;
+  font-size: 62px;
+  font-weight: bold;
+  margin: 0em;
+  margin-top: -.2em;
+}
+.heading {
+    background-color: red;
+    padding: 1em;
+    display: block;
+}
+.subtitle {
+  color: white;
+  font-style: italic;
+}
+h3 {
+  font-style: italic;
+  color: grey;
+}
+.evt {
+  margin: .3em;
+  border: 1px solid grey;
+  display: block;
+}
+.evt-title {
+  padding: 1em;
+  font-size: 1.4em;
+  cursor: hand;
+}
+.evt-detail {
+  padding: -0em 2em 2em 2em;
+  font-size: 1.0em;
+  display: none;
+  cursor: hand;
+}
+
+.togglebox:checked + .evt-detail {
+  display: block;
+}
+input {
+  display: none;
+}
