@@ -1,5 +1,5 @@
 import scala.io.Source
-import java.nio.file.{Path, Paths, Files}
+import java.nio.file.{Files, Path, Paths, StandardCopyOption}
 import java.time._
 
 import scalatags.Text.all._
@@ -130,7 +130,7 @@ object Main extends App {
 
   val outputDir = Paths.get("target/site")
   Files.createDirectories(outputDir)
-  Files.copy(Paths.get("resources", "style.css"), Paths.get(outputDir.toString, "style.css"))
+  Files.copy(Paths.get("resources", "style.css"), Paths.get(outputDir.toString, "style.css"), StandardCopyOption.REPLACE_EXISTING)
 
   printList(outputDir, events)
 }
