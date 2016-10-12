@@ -1,5 +1,5 @@
 import scala.io.Source
-import java.nio.file.{Paths, Files}
+import java.nio.file.{Path, Paths, Files}
 import java.time._
 
 import scalatags.Text.all._
@@ -96,8 +96,8 @@ object Main extends App {
         )
     }
 
-  def printList(events: Seq[Event]) = {
-    Files.write(Paths.get("list.html"),
+  def printList(outputDir: Path, events: Seq[Event]) = {
+    Files.write(Paths.get(outputDir.toString, "index.html"),
                 html(
                     head(
                       link(href:="https://fonts.googleapis.com/css?family=Lobster%20Two|Raleway", rel:="stylesheet"),
@@ -128,5 +128,9 @@ object Main extends App {
     })
     .toList
 
-  printList(events)
+  val outputDir = Paths.get("target/site")
+  Files.createDirectories(outputDir)
+  Files.copy(Paths.get("resources", "style.css"), Paths.get(outputDir.toString, "style.css"))
+
+  printList(outputDir, events)
 }
