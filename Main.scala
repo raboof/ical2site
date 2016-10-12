@@ -48,8 +48,7 @@ object Main extends App {
 
   def fetch(url: String): String = {
     val cacheDir = Paths.get("cache")
-    if (!Files.exists(cacheDir))
-      Files.createDirectory(Paths.get("cache"))
+    Files.createDirectories(cacheDir)
 
     val cachePath = Paths.get("cache/" + url.replaceAll("/", "_"))
     if (Files.exists(cachePath)) {
