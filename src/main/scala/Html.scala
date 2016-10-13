@@ -1,9 +1,12 @@
 import java.time._
 
 import scalatags.Text.all._
+import scalatags.Text.TypedTag
 
 object Html {
-  def list(events: Seq[Event]) =
+  def list(events: Seq[Event]) = page(div(eventListHtml(events)))
+
+  private def page(content: TypedTag[_]) =
     html(
       head(
         link(href := "https://fonts.googleapis.com/css?family=Lobster%20Two|Raleway", rel := "stylesheet"),
@@ -14,7 +17,7 @@ object Html {
           div(cls := "title")(style := "font-family: 'Lobster Two', cursive; font-size: 62px")("Deventer.live"),
           div(cls := "subtitle")("Concerten en activiteiten in Deventer")
         ),
-        eventListHtml(events)
+        content
       )
     )
 
