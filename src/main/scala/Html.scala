@@ -1,4 +1,5 @@
 import java.time._
+import java.time.temporal.ChronoUnit
 
 import scalatags.Text.all._
 import scalatags.Text.TypedTag
@@ -53,7 +54,7 @@ object Html {
       head(
         link(href := "https://fonts.googleapis.com/css?family=Lobster%20Two|Raleway", rel := "stylesheet"),
         link(href := "style.css", rel := "stylesheet"),
-        meta(name := "description", content:=subtitle)
+        meta(name := "description", content := subtitle)
       ),
       body(style := "font-family: 'Raleway', sans-serif")(
         div(cls := "about")(
@@ -77,7 +78,7 @@ object Html {
     events.filter(!_.startDate.isBefore(LocalDate.now())).groupBy(_.startDate).toList.sortBy(_._1).map {
       case (date, events) =>
         div(
-          h2(s"$date"),
+          h2(formatDate(date)),
           events.groupBy(_.source).toList.map {
             case (source, events) =>
               div(
@@ -99,4 +100,17 @@ object Html {
           }
         )
     }
+
+  private def formatDate(date: LocalDate) = s"$date: ${postfix(date)}"
+
+  private def postfix(date: LocalDate) =
+    Duration.between(LocalDate.now().atTime(0, 0), date.atTime(0, 0)).toDays match {
+      case 0 => "vandaag"
+      case 1 => "morgen"
+      case n if n < 7 => s"over $n dagen"
+      case n if n % 7 == 0 => s"over " + duration(n / 7, "week", "weken")
+      case n => s"over " + duration(n / 7, "week", "weken") + " en " + duration(n % 7, "dag", "dagen")
+    }
+
+  private def duration(n: Long, singular: String, plural: String) = n + " " + (if (n == 1) singular else plural)
 }
