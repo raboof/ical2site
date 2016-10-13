@@ -1,4 +1,4 @@
-scalacOptions := Seq("-feature", "-deprecation", "-Ywarn-unused-import")
+scalacOptions := Seq("-feature", "-deprecation")
 
 scalaVersion := "2.11.8"
 
