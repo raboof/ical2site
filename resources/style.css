@@ -3,6 +3,7 @@ html {
 }
 body {
   margin: 2em;
+  margin-top: 1em;
 }
 p {
   line-height: 1.5em;

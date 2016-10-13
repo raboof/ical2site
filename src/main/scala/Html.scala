@@ -46,11 +46,14 @@ object Html {
     )
   )
 
-  private def page(content: TypedTag[_]*) =
+  private val subtitle = "Concerten en activiteiten in Deventer"
+
+  private def page(bodyContent: TypedTag[_]*) =
     html(
       head(
         link(href := "https://fonts.googleapis.com/css?family=Lobster%20Two|Raleway", rel := "stylesheet"),
-        link(href := "style.css", rel := "stylesheet")
+        link(href := "style.css", rel := "stylesheet"),
+        meta(name := "description", content:=subtitle)
       ),
       body(style := "font-family: 'Raleway', sans-serif")(
         div(cls := "about")(
@@ -60,9 +63,9 @@ object Html {
           div(cls := "title")(style := "font-family: 'Lobster Two', cursive; font-size: 62px")(
             a(href := "index.html")("Deventer.live")
           ),
-          div(cls := "subtitle")("Concerten en activiteiten in Deventer")
+          div(cls := "subtitle")(subtitle)
         ),
-        content
+        bodyContent
       )
     )
 
