@@ -2,6 +2,7 @@ import java.time._
 import java.time.temporal.ChronoUnit
 
 import scalatags.Text.all._
+import scalatags.Text.tags2.title
 import scalatags.Text.TypedTag
 
 object Html {
@@ -47,11 +48,13 @@ object Html {
     )
   )
 
+  private val maintitle = "Deventer.live"
   private val subtitle = "Concerten en activiteiten in Deventer"
 
   private def page(bodyContent: TypedTag[_]*) =
     html(
       head(
+        title(maintitle + " | " + subtitle),
         link(href := "https://fonts.googleapis.com/css?family=Lobster%20Two|Raleway", rel := "stylesheet"),
         link(href := "style.css", rel := "stylesheet"),
         meta(name := "description", content := subtitle)
@@ -62,7 +65,7 @@ object Html {
         ),
         div(cls := "heading")(
           div(cls := "title")(style := "font-family: 'Lobster Two', cursive; font-size: 62px")(
-            a(href := "index.html")("Deventer.live")
+            a(href := "index.html")(maintitle)
           ),
           div(cls := "subtitle")(subtitle)
         ),
