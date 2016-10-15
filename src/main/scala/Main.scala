@@ -61,7 +61,7 @@ object Main extends App {
 
   val outputDir = Paths.get("target/site")
   Files.createDirectories(outputDir)
-  Seq("style.css", ".htaccess").foreach(file =>
+  Seq("style.css", ".htaccess", "favicon.ico").foreach(file =>
     Files.copy(Paths.get("resources", file), Paths.get(outputDir.toString, file), StandardCopyOption.REPLACE_EXISTING))
 
   Files.write(Paths.get(outputDir.toString, "index.html"), Html.list(events).render.getBytes("UTF-8"))
