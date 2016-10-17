@@ -41,7 +41,7 @@ object Main extends App {
       "http://www.muziekkoepelneringbogel.nl"),
     Source(
       "GL",
-      "Cafe het Glas in Lood",
+      "Café het Glas in Lood",
       "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=cafehetglasinlood&token=FB_TOKEN",
       "http://www.cafehetglasinlood.nl")
   )
