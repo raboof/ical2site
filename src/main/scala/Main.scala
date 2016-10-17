@@ -43,7 +43,12 @@ object Main extends App {
       "GL",
       "Café het Glas in Lood",
       "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=cafehetglasinlood&token=FB_TOKEN",
-      "http://www.cafehetglasinlood.nl")
+      "http://www.cafehetglasinlood.nl"),
+    Source(
+      "P",
+      "Bier- en Danscafé Persee",
+      "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=DanscafePersee&token=FB_TOKEN",
+      "http://www.persee.nl/")
   )
 
   def getDate(date: java.util.Date): LocalDate = {
