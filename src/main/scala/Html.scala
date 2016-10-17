@@ -57,7 +57,14 @@ object Html {
         title(maintitle + " | " + subtitle),
         link(href := "https://fonts.googleapis.com/css?family=Lobster%20Two|Raleway", rel := "stylesheet"),
         link(href := "style.css", rel := "stylesheet"),
-        meta(name := "description", content := subtitle)
+        meta(name := "description", content := subtitle),
+        meta(attr("property") := "og:url", content := "https://deventer.live"),
+        meta(attr("property") := "og:title", content := maintitle),
+        meta(attr("property") := "og:description", content := subtitle),
+        meta(attr("property") := "og:image", content := "https://deventer.live/ogimage_square.png"),
+        meta(attr("property") := "og:image:width", content := "316"),
+        meta(attr("property") := "og:image:height", content := "316"),
+        meta(attr("property") := "og:image:type", content := "image/png")
       ),
       body(style := "font-family: 'Raleway', sans-serif")(
         div(cls := "about")(
