@@ -38,7 +38,12 @@ object Main extends App {
       "NB",
       "Muziekkoepel Nerging-Bogel",
       "http://www.muziekkoepelneringbogel.nl/index.php?option=com_jevents&task=icals.export&format=ical&catids=0&years=0&k=38f31bbc7bff3bce9137ac0e5a56adc2",
-      "http://www.muziekkoepelneringbogel.nl")
+      "http://www.muziekkoepelneringbogel.nl"),
+    Source(
+      "GL",
+      "Cafe het Glas in Lood",
+      "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=cafehetglasinlood&token=FB_TOKEN",
+      "http://www.cafehetglasinlood.nl")
   )
 
   def getDate(date: java.util.Date): LocalDate = {
