@@ -8,7 +8,14 @@ body {
 p {
   line-height: 1.5em;
 }
-
+h2.day {
+  margin-bottom: 0px;
+}
+div.date {
+  margin-left: .3em;
+  font-style: italic;
+  font-size: .8em;
+}
 .about a {
   text-shadow: none;
   box-shadow: none;

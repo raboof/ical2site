@@ -87,7 +87,8 @@ object Html {
     events.filter(!_.startDate.isBefore(LocalDate.now())).groupBy(_.startDate).toList.sortBy(_._1).map {
       case (date, events) =>
         div(
-          h2(formatDate(date)),
+          h2(cls := "day")(formatDate(date)),
+          div(cls := "date")(subDate(date)),
           events.groupBy(_.source).toList.map {
             case (source, events) =>
               div(
@@ -110,9 +111,20 @@ object Html {
         )
     }
 
-  private def formatDate(date: LocalDate) = s"$date: ${postfix(date)}"
+  private def formatDate(date: LocalDate) = description(date)
+  private def subDate(date: LocalDate) = s"${ofWeek(date)} $date"
 
-  private def postfix(date: LocalDate) =
+  private def ofWeek(date: LocalDate) = date.getDayOfWeek match {
+    case DayOfWeek.MONDAY => "maandag"
+    case DayOfWeek.TUESDAY => "dinsdag"
+    case DayOfWeek.WEDNESDAY => "woensdag"
+    case DayOfWeek.THURSDAY => "donderdag"
+    case DayOfWeek.FRIDAY => "vrijdag"
+    case DayOfWeek.SATURDAY => "zaterdag"
+    case DayOfWeek.SUNDAY => "zondag"
+  }
+
+  private def description(date: LocalDate) =
     Duration.between(LocalDate.now().atTime(0, 0), date.atTime(0, 0)).toDays match {
       case 0 => "vandaag"
       case 1 => "morgen"
