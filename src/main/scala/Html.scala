@@ -6,9 +6,11 @@ import scalatags.Text.tags2.title
 import scalatags.Text.TypedTag
 
 object Html {
-  def list(events: Seq[Event]) = page(div(eventListHtml(events)))
+  def list(mainTitle: String, subtitle: String, events: Seq[Event]) = page(mainTitle, subtitle, div(eventListHtml(events)))
 
-  def about(sources: Seq[Source]) = page(
+  def about(config: Config) = page(
+    config.mainTitle,
+    config.subtitle,
     div(style := "margin: 2em")(
       h2("Over deze site"),
       p(
@@ -18,7 +20,7 @@ object Html {
       p(
         "De informatie op deze site wordt verzameld van een aantal bronnen:",
         ul(
-          sources.map(source => li(a(href := source.icalUrl)("[ical]"), " ", a(href := source.siteUrl)(source.name)))
+          config.sources.map(source => li(a(href := source.icalUrl)("[ical]"), " ", a(href := source.siteUrl)(source.name)))
         )
       ),
       h3("Ook op deze site?"),
@@ -48,18 +50,15 @@ object Html {
     )
   )
 
-  private val maintitle = "Deventer.live"
-  private val subtitle = "Concerten en activiteiten in Deventer"
-
-  private def page(bodyContent: TypedTag[_]*) =
+  private def page(mainTitle: String, subtitle: String, bodyContent: TypedTag[_]*) =
     html(
       head(
-        title(maintitle + " | " + subtitle),
+        title(mainTitle + " | " + subtitle),
         link(href := "https://fonts.googleapis.com/css?family=Lobster%20Two|Raleway", rel := "stylesheet"),
         link(href := "style.css", rel := "stylesheet"),
         meta(name := "description", content := subtitle),
         meta(attr("property") := "og:url", content := "https://deventer.live"),
-        meta(attr("property") := "og:title", content := maintitle),
+        meta(attr("property") := "og:title", content := mainTitle),
         meta(attr("property") := "og:description", content := subtitle),
         meta(attr("property") := "og:image", content := "https://deventer.live/ogimage_square.png"),
         meta(attr("property") := "og:image:width", content := "316"),
@@ -72,7 +71,7 @@ object Html {
         ),
         div(cls := "heading")(
           div(cls := "title")(style := "font-family: 'Lobster Two', cursive; font-size: 62px")(
-            a(href := "index.html")(maintitle)
+            a(href := "index.html")(mainTitle)
           ),
           div(cls := "subtitle")(subtitle)
         ),

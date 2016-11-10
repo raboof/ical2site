@@ -1,0 +1,70 @@
+{
+  "mainTitle": "Deventer.live",
+  "subtitle": "Concerten en activiteiten in Deventer",
+  "sources": [{
+    "tag": "BWH",
+    "name": "Burgerweeshuis",
+    "icalUrl": "http://burgerweeshuis.nl/agenda.ics",
+    "siteUrl": "http://burgerweeshuis.nl"
+  }, {
+    "tag": "HK",
+    "name": "Havenkwartier",
+    "icalUrl": "http://www.havenkwartierdeventer.com/events.ics",
+    "siteUrl": "http://www.havenkwartierdeventer.com"
+  }, {
+    "tag": "ToJ",
+    "name": "Taste of Jazz",
+    "icalUrl": "https://www.tasteofjazz.nl/events.ics",
+    "siteUrl": "https://www.tasteofjazz.nl"
+  }, {
+    "tag": "BK",
+    "name": "Bouwkunde",
+    "icalUrl": "http://www.theaterbouwkunde.nl/programma/events.ics",
+    "siteUrl": "http://www.theaterbouwkunde.nl"
+  }, {
+    "tag": "VVV",
+    "name": "VVV Deventer",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/vvvdeventer",
+    "siteUrl": "http://deventer.info"
+  }, {
+    "tag": "DS",
+    "name": "Deventer Schouwburg",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/deventerschouwburg2ical",
+    "siteUrl": "https://www.deventerschouwburg.nl"
+  }, {
+    "tag": "HIP",
+    "name": "De Hip",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=DeHip&token=FB_TOKEN",
+    "siteUrl": "http://dehip.nl"
+  }, {
+    "tag": "DB",
+    "name": "Davo Bieren",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=davobieren&token=FB_TOKEN",
+    "siteUrl": "http://www.davobieren.nl"
+  }, {
+    "tag": "DH",
+    "name": "Bierencafe de Heks",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=bierencafedeheks&token=FB_TOKEN",
+    "siteUrl": "http://www.deheks.nl"
+  }, {
+    "tag": "NB",
+    "name": "Muziekkoepel Nerging-Bogel",
+    "icalUrl": "http://www.muziekkoepelneringbogel.nl/index.php?option=com_jevents&task=icals.export&format=ical&catids=0&years=0&k=38f31bbc7bff3bce9137ac0e5a56adc2",
+    "siteUrl": "http://www.muziekkoepelneringbogel.nl"
+  }, {
+    "tag": "GL",
+    "name": "Café het Glas in Lood",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=cafehetglasinlood&token=FB_TOKEN",
+    "siteUrl": "http://www.cafehetglasinlood.nl"
+  }, {
+    "tag": "P",
+    "name": "Bier- en Danscafé Persee",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=DanscafePersee&token=FB_TOKEN",
+    "siteUrl": "http://www.persee.nl/"
+  }, {
+    "tag": "V",
+    "name": "Vogeleiland",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=vogeleilanddeventer&token=FB_TOKEN",
+    "siteUrl": "http://vogeleilanddeventer.nl/"
+  }]
+}
