@@ -57,6 +57,7 @@ object Html {
         link(href := "https://fonts.googleapis.com/css?family=Lobster%20Two|Raleway", rel := "stylesheet"),
         link(href := "style.css", rel := "stylesheet"),
         meta(name := "description", content := subtitle),
+        meta(name := "viewport", content := "user-scalable=no"),
         meta(attr("property") := "og:url", content := "https://deventer.live"),
         meta(attr("property") := "og:title", content := mainTitle),
         meta(attr("property") := "og:description", content := subtitle),
