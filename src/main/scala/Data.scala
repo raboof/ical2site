@@ -20,13 +20,14 @@ object Data {
   }
 
   def fetch[T](url: String, marshaller: String => Try[T]): T = {
-    marshaller(Cache.fetch(url).getOrElse(fetch(url)))
-      .recoverWith { case _ => {
-          val txt = fetch(url)
-          marshaller(txt).recoverWith{ case t => Failure(new IllegalStateException(
-           s"Failed to marshall $url: ${t.getMessage}. Full text:\n$txt", t)) }
-        }
-      }.get
+    val decoratedMarshaller: String => Try[T] =
+      txt => marshaller(txt).recoverWith{ case t => Failure(new IllegalStateException(
+       s"Failed to marshall: ${t.getMessage}. Full text:\n$txt", t)) }
+
+    decoratedMarshaller(Cache.fetch(url).getOrElse(fetch(url)))
+      .recoverWith { case _ => decoratedMarshaller(fetch(url)) }
+      .recoverWith { case t => Failure(new IllegalStateException(s"Failed to marshall $url: ${t.getMessage}}", t)) }
+      .get
   }
 
   private def fetch(url: String): String = {
