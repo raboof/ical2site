@@ -1,7 +1,9 @@
 import java.nio.file.{Files, Paths, StandardCopyOption}
 import java.time._
 
-import biweekly.Biweekly
+import scala.util._
+
+import biweekly.{ Biweekly, ICalendar }
 import collection.JavaConverters._
 
 import spray.json._
@@ -17,10 +19,18 @@ object Main extends App {
     ZonedDateTime.ofInstant(date.toInstant, ZoneId.systemDefault()).toLocalDate;
   }
 
+  val marshaller: String => Try[ICalendar] = txt => {
+    val parsed = Biweekly.parse(txt)
+    val warnings = new java.util.ArrayList[java.util.List[String]]()
+    parsed.warnings(warnings)
+    Option(parsed.first())
+      .map(Success(_))
+      .getOrElse(Failure(new IllegalStateException(s"Could not parse calendar: $warnings")))
+  }
+
   val events: Seq[Event] = config.sources.par
     .flatMap(source => {
-      val txt = Data.fetch(source.icalUrl)
-      val cal = Biweekly.parse(txt).first()
+      val cal = Data.fetch(source.icalUrl, marshaller)
       cal.getEvents.asScala.map(
         event =>
           Event(getDate(event.getDateStart.getValue),
