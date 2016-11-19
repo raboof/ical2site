@@ -4,7 +4,7 @@
   "sources": [{
     "tag": "BWH",
     "name": "Burgerweeshuis",
-    "icalUrl": "http://burgerweeshuis.nl/agenda.ics",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/bwh2ical",
     "siteUrl": "http://burgerweeshuis.nl"
   }, {
     "tag": "HK",
