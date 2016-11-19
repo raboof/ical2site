@@ -18,10 +18,10 @@ object Html {
       ),
       h3("Waar komt de informatie op deze site vandaan?"),
       p(
-        "De informatie op deze site wordt verzameld van een aantal bronnen:",
-        ul(
-          config.sources.map(source => li(a(href := source.icalUrl)("[ical]"), " ", a(href := source.siteUrl)(source.name)))
-        )
+        "De informatie op deze site wordt verzameld van een aantal bronnen:"
+      ),
+      ul(
+        config.sources.map(source => li(a(href := source.icalUrl)("[ical]"), " ", a(href := source.siteUrl)(source.name)))
       ),
       h3("Ook op deze site?"),
       p("Heb of weet je een website met activiteiten in Deventer die ook in dit overzicht thuis hoort?"),

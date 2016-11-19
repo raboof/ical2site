@@ -12,6 +12,11 @@ import nu.validator.servlet.imagereview._
 
 class HtmlSpec extends WordSpec with Matchers {
   "Rendering HTML" should {
+    "produce valid HTML for the about page" in {
+      val html = Html.about(Config("Main title", "subtitle", List(source))).getBytes("UTF-8")
+      validateHtml(html)
+    }
+
     "produce valid HTML for a list page without events" in {
       val html = Html.list("Main title", "subtitle", List.empty).getBytes("UTF-8")
       validateHtml(html)
@@ -37,7 +42,7 @@ class HtmlSpec extends WordSpec with Matchers {
     	validator.checkHtmlInputSource(new InputSource(new ByteArrayInputStream(html)))
 
       val successMessage = "Validated successfully"
-      errorHandler.end(successMessage, "boo")
+      errorHandler.end(successMessage, "")
 
       out.toString.trim should be(successMessage)
       errorHandler.getFatalErrors() should be(0)
