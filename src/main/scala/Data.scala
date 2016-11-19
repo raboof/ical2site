@@ -28,6 +28,8 @@ object Data {
 
     decoratedMarshaller(Cache.fetch(url).getOrElse(fetch(url))).recoverWith {
       case _ => decoratedMarshaller(fetch(url))
+    }.recoverWith {
+      case _ => decoratedMarshaller(fetch(url))
     }.recoverWith { case t => Failure(new IllegalStateException(s"Failed to marshall $url: ${t.getMessage}}", t)) }.get
   }
 
