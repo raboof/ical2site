@@ -6,7 +6,8 @@ import scalatags.Text.tags2.title
 import scalatags.Text.TypedTag
 
 object Html {
-  def list(mainTitle: String, subtitle: String, events: Seq[Event]) = page(mainTitle, subtitle, div(eventListHtml(events)))
+  def list(mainTitle: String, subtitle: String, events: Seq[Event]) =
+    page(mainTitle, subtitle, div(eventListHtml(events)))
 
   def about(config: Config) = page(
     config.mainTitle,
@@ -18,10 +19,11 @@ object Html {
       ),
       h3("Waar komt de informatie op deze site vandaan?"),
       p(
-        "De informatie op deze site wordt verzameld van een aantal bronnen:",
-        ul(
-          config.sources.map(source => li(a(href := source.icalUrl)("[ical]"), " ", a(href := source.siteUrl)(source.name)))
-        )
+        "De informatie op deze site wordt verzameld van een aantal bronnen:"
+      ),
+      ul(
+        config.sources.map(source =>
+          li(a(href := source.icalUrl)("[ical]"), " ", a(href := source.siteUrl)(source.name)))
       ),
       h3("Ook op deze site?"),
       p("Heb of weet je een website met activiteiten in Deventer die ook in dit overzicht thuis hoort?"),
@@ -51,10 +53,10 @@ object Html {
   )
 
   private def page(mainTitle: String, subtitle: String, bodyContent: TypedTag[_]*) =
-    html(
+    "<!DOCTYPE html>" + html(
       head(
         title(mainTitle + " | " + subtitle),
-        link(href := "https://fonts.googleapis.com/css?family=Lobster%20Two|Raleway", rel := "stylesheet"),
+        link(href := "https://fonts.googleapis.com/css?family=Lobster%20Two%7CRaleway", rel := "stylesheet"),
         link(href := "style.css", rel := "stylesheet"),
         meta(name := "description", content := subtitle),
         meta(name := "viewport", content := "user-scalable=no"),
@@ -98,10 +100,10 @@ object Html {
                   val uid = evt.data.getUid.getValue
                   div(cls := "evt", style := "cursor:hand")(
                     label(`for` := uid)(
-                      div(cls := "evt-title")(s"${evt.data.getSummary.getValue}"),
+                      span(cls := "evt-title")(s"${evt.data.getSummary.getValue}"),
                       input(cls := "togglebox", `type` := "checkbox", id := uid),
-                      div(cls := "evt-detail", id := uid)(
-                        p(s"${evt.description}"),
+                      span(cls := "evt-detail")(
+                        span(cls := "evt-description")(s"${evt.description}"),
                         evt.url.map(url => a(href := url)("site"))
                       )
                     )

@@ -3,7 +3,7 @@ import java.time._
 
 import scala.util._
 
-import biweekly.{ Biweekly, ICalendar }
+import biweekly.{Biweekly, ICalendar}
 import collection.JavaConverters._
 
 import spray.json._
@@ -13,7 +13,8 @@ object Main extends App {
   implicit val sourceFormat = jsonFormat4(Source)
   implicit val configFormat = jsonFormat3(Config)
 
-  val config = new String(Files.readAllBytes(Paths.get("resources", "deventer.live.json")), "UTF-8").parseJson.convertTo[Config]
+  val config =
+    new String(Files.readAllBytes(Paths.get("resources", "deventer.live.json")), "UTF-8").parseJson.convertTo[Config]
 
   def getDate(date: java.util.Date): LocalDate = {
     ZonedDateTime.ofInstant(date.toInstant, ZoneId.systemDefault()).toLocalDate;
@@ -46,6 +47,7 @@ object Main extends App {
   Seq("style.css", ".htaccess", "favicon.ico", "ogimage_square.png").foreach(file =>
     Files.copy(Paths.get("resources", file), Paths.get(outputDir.toString, file), StandardCopyOption.REPLACE_EXISTING))
 
-  Files.write(Paths.get(outputDir.toString, "index.html"), Html.list(config.mainTitle, config.subtitle, events).render.getBytes("UTF-8"))
-  Files.write(Paths.get(outputDir.toString, "about.html"), Html.about(config).render.getBytes("UTF-8"))
+  Files.write(Paths.get(outputDir.toString, "index.html"),
+              Html.list(config.mainTitle, config.subtitle, events).getBytes("UTF-8"))
+  Files.write(Paths.get(outputDir.toString, "about.html"), Html.about(config).getBytes("UTF-8"))
 }
