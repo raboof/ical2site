@@ -52,15 +52,21 @@ h3 {
   display: block;
 }
 .evt-title {
+  display: block;
   padding: 1em;
   font-size: 1.4em;
   cursor: hand;
 }
 .evt-detail {
+  display: block;
   padding: -0em 2em 2em 2em;
   font-size: 1.0em;
   display: none;
   cursor: hand;
+}
+.evt-description {
+  display: block;
+  padding-bottom: 1em;
 }
 
 .togglebox:checked + .evt-detail {

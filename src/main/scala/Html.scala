@@ -51,10 +51,10 @@ object Html {
   )
 
   private def page(mainTitle: String, subtitle: String, bodyContent: TypedTag[_]*) =
-    html(
+    "<!DOCTYPE html>" + html(
       head(
         title(mainTitle + " | " + subtitle),
-        link(href := "https://fonts.googleapis.com/css?family=Lobster%20Two|Raleway", rel := "stylesheet"),
+        link(href := "https://fonts.googleapis.com/css?family=Lobster%20Two%7CRaleway", rel := "stylesheet"),
         link(href := "style.css", rel := "stylesheet"),
         meta(name := "description", content := subtitle),
         meta(name := "viewport", content := "user-scalable=no"),
@@ -98,10 +98,10 @@ object Html {
                   val uid = evt.data.getUid.getValue
                   div(cls := "evt", style := "cursor:hand")(
                     label(`for` := uid)(
-                      div(cls := "evt-title")(s"${evt.data.getSummary.getValue}"),
+                      span(cls := "evt-title")(s"${evt.data.getSummary.getValue}"),
                       input(cls := "togglebox", `type` := "checkbox", id := uid),
-                      div(cls := "evt-detail", id := uid)(
-                        p(s"${evt.description}"),
+                      span(cls := "evt-detail")(
+                        span(cls := "evt-description")(s"${evt.description}"),
                         evt.url.map(url => a(href := url)("site"))
                       )
                     )

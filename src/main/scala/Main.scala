@@ -46,6 +46,6 @@ object Main extends App {
   Seq("style.css", ".htaccess", "favicon.ico", "ogimage_square.png").foreach(file =>
     Files.copy(Paths.get("resources", file), Paths.get(outputDir.toString, file), StandardCopyOption.REPLACE_EXISTING))
 
-  Files.write(Paths.get(outputDir.toString, "index.html"), Html.list(config.mainTitle, config.subtitle, events).render.getBytes("UTF-8"))
-  Files.write(Paths.get(outputDir.toString, "about.html"), Html.about(config).render.getBytes("UTF-8"))
+  Files.write(Paths.get(outputDir.toString, "index.html"), Html.list(config.mainTitle, config.subtitle, events).getBytes("UTF-8"))
+  Files.write(Paths.get(outputDir.toString, "about.html"), Html.about(config).getBytes("UTF-8"))
 }
