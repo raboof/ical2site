@@ -1,6 +1,7 @@
 {
   "mainTitle": "Deventer.live",
   "subtitle": "Concerten en activiteiten in Deventer",
+  "lang": "nl",
   "sources": [{
     "tag": "BWH",
     "name": "Burgerweeshuis",

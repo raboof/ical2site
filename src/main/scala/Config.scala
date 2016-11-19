@@ -1,1 +1,1 @@
-case class Config(mainTitle: String, subtitle: String, sources: List[Source])
+case class Config(mainTitle: String, subtitle: String, lang: String, sources: List[Source])

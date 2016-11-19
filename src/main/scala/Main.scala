@@ -11,7 +11,7 @@ import DefaultJsonProtocol._
 
 object Main extends App {
   implicit val sourceFormat = jsonFormat4(Source)
-  implicit val configFormat = jsonFormat3(Config)
+  implicit val configFormat = jsonFormat4(Config)
 
   val config =
     new String(Files.readAllBytes(Paths.get("resources", "deventer.live.json")), "UTF-8").parseJson.convertTo[Config]
@@ -48,6 +48,6 @@ object Main extends App {
     Files.copy(Paths.get("resources", file), Paths.get(outputDir.toString, file), StandardCopyOption.REPLACE_EXISTING))
 
   Files.write(Paths.get(outputDir.toString, "index.html"),
-              Html.list(config.mainTitle, config.subtitle, events).getBytes("UTF-8"))
+              Html.list(config.mainTitle, config.subtitle, config.lang, events).getBytes("UTF-8"))
   Files.write(Paths.get(outputDir.toString, "about.html"), Html.about(config).getBytes("UTF-8"))
 }
