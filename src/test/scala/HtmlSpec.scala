@@ -28,18 +28,20 @@ class HtmlSpec extends WordSpec with Matchers {
     }
 
     def validateHtml(html: Array[Byte]) {
+
       /** Based on https://gist.github.com/vincent-zurczak/23e0f626eaafab96cb32 - TODO needs Scala-ification ;) */
       val out: ByteArrayOutputStream = new ByteArrayOutputStream()
-    	val sourceCode: SourceCode = new SourceCode()
-    	val imageCollector: ImageCollector = new ImageCollector(sourceCode)
-    	val showSource = false
-    	val emitter: MessageEmitter = new TextMessageEmitter(out, /* asciiQuotes =*/ false)
-    	val errorHandler: MessageEmitterAdapter = new MessageEmitterAdapter(sourceCode, showSource, imageCollector, 0, false, emitter)
+      val sourceCode: SourceCode = new SourceCode()
+      val imageCollector: ImageCollector = new ImageCollector(sourceCode)
+      val showSource = false
+      val emitter: MessageEmitter = new TextMessageEmitter(out, /* asciiQuotes =*/ false)
+      val errorHandler: MessageEmitterAdapter =
+        new MessageEmitterAdapter(sourceCode, showSource, imageCollector, 0, false, emitter)
 
-    	val validator: SimpleDocumentValidator = new SimpleDocumentValidator()
-    	validator.setUpMainSchema("http://s.validator.nu/html5-rdfalite.rnc", new SystemErrErrorHandler())
-    	validator.setUpValidatorAndParsers(errorHandler, /* noStream =*/ false, /* loadExternalEnts =*/ false)
-    	validator.checkHtmlInputSource(new InputSource(new ByteArrayInputStream(html)))
+      val validator: SimpleDocumentValidator = new SimpleDocumentValidator()
+      validator.setUpMainSchema("http://s.validator.nu/html5-rdfalite.rnc", new SystemErrErrorHandler())
+      validator.setUpValidatorAndParsers(errorHandler, /* noStream =*/ false, /* loadExternalEnts =*/ false)
+      validator.checkHtmlInputSource(new InputSource(new ByteArrayInputStream(html)))
 
       val successMessage = "Validated successfully"
       errorHandler.end(successMessage, "")

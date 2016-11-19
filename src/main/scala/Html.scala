@@ -6,7 +6,8 @@ import scalatags.Text.tags2.title
 import scalatags.Text.TypedTag
 
 object Html {
-  def list(mainTitle: String, subtitle: String, events: Seq[Event]) = page(mainTitle, subtitle, div(eventListHtml(events)))
+  def list(mainTitle: String, subtitle: String, events: Seq[Event]) =
+    page(mainTitle, subtitle, div(eventListHtml(events)))
 
   def about(config: Config) = page(
     config.mainTitle,
@@ -21,7 +22,8 @@ object Html {
         "De informatie op deze site wordt verzameld van een aantal bronnen:"
       ),
       ul(
-        config.sources.map(source => li(a(href := source.icalUrl)("[ical]"), " ", a(href := source.siteUrl)(source.name)))
+        config.sources.map(source =>
+          li(a(href := source.icalUrl)("[ical]"), " ", a(href := source.siteUrl)(source.name)))
       ),
       h3("Ook op deze site?"),
       p("Heb of weet je een website met activiteiten in Deventer die ook in dit overzicht thuis hoort?"),
