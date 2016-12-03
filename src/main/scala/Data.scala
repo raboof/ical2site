@@ -7,10 +7,10 @@ object Data {
     val cacheDir = Paths.get("cache")
     Files.createDirectories(cacheDir)
 
-    def fetch(url: String): Option[String] = {
+    def fetch(url: String): Try[String] = {
       val cp = cachePath(url);
-      if (Files.exists(cp)) Some(new String(Files.readAllBytes(cp), "UTF-8"))
-      else None
+      if (Files.exists(cp)) Success(new String(Files.readAllBytes(cp), "UTF-8"))
+      else Failure(new IllegalStateException(s"Url $url not found in cache"))
     }
 
     def write(url: String, file: String) =
@@ -20,20 +20,21 @@ object Data {
   }
 
   def fetch[T](url: String, marshaller: String => Try[T]): T = {
-    val decoratedMarshaller: String => Try[T] =
-      txt =>
-        marshaller(txt).recoverWith {
-          case t => Failure(new IllegalStateException(s"Failed to marshall: ${t.getMessage}. Full text:\n$txt", t))
+    def decoratedMarshaller(content: Try[String]): Try[T] = content match {
+      case Success(txt) =>      marshaller(txt).recoverWith {
+        case t => Failure(new IllegalStateException(s"Failed to marshall: ${t.getMessage}. Full text:\n$txt", t))
       }
+      case Failure(f) => Failure(f)
+    }
 
-    decoratedMarshaller(Cache.fetch(url).getOrElse(fetch(url))).recoverWith {
+    decoratedMarshaller(Cache.fetch(url).recoverWith { case _ => fetch(url) }).recoverWith {
       case _ => decoratedMarshaller(fetch(url))
     }.recoverWith {
       case _ => decoratedMarshaller(fetch(url))
     }.recoverWith { case t => Failure(new IllegalStateException(s"Failed to marshall $url: ${t.getMessage}}", t)) }.get
   }
 
-  private def fetch(url: String): String = {
+  private def fetch(url: String): Try[String] = Try {
     val content = scala.io.Source.fromURL(resolvePlaceholders(url)).mkString
     Cache.write(url, content)
     content
