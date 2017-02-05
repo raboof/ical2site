@@ -67,5 +67,10 @@
     "name": "Vogeleiland",
     "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=vogeleilanddeventer&token=FB_TOKEN",
     "siteUrl": "http://vogeleilanddeventer.nl/"
+  }, {
+    "tag": "GGH",
+    "name": "Geert Groote Huis",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/geertgroote2ical",
+    "siteUrl": "http://www.geertgrootehuis.nl/agenda/"
   }]
 }
