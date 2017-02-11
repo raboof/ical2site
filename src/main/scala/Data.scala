@@ -1,7 +1,7 @@
 import scala.util._
 
 object Data {
-  val cache = new Cache()
+  val cache = new Cache(fetch)
 
   def fetch[T](url: String, marshaller: String => Try[T]): T = {
     def decoratedMarshaller(content: Try[String]): Try[T] = content match {
