@@ -1,4 +1,4 @@
-import scala.util.{Random, Success}
+import scala.util.{Failure, Random, Success, Try}
 
 import org.scalatest._
 
@@ -10,7 +10,7 @@ class CacheSpec extends WordSpec with Matchers {
       val url = Random.nextString(10)
       cache.write(url, content)
 
-      cache.fetch(url) should be(Success(content))
+      cache.fetch(url, x => Success(x)) should be(Success(content))
     }
 
     "retrieve content not previously written to the cache through the generator" in {
@@ -22,9 +22,28 @@ class CacheSpec extends WordSpec with Matchers {
       })
       val url = Random.nextString(10)
 
-      cache.fetch(url) should be(Success(content + 1))
-      // Value should be cached
-      cache.fetch(url) should be(Success(content + 1))
+      cache.fetch(url, x => Success(x)) should be(Success(content + 1))
+      // Value should be cached:
+      cache.fetch(url, x => Success(x)) should be(Success(content + 1))
+    }
+
+    "don't store content in the cache when it fails to marshal" in {
+      var first = true
+      val cache = new Cache(generator = _ => {
+        if (first) {
+          first = false
+          Success("first")
+        } else Success("notfirst")
+      })
+
+      val marshaller: String => Try[String] = {
+        case "first" => Failure(new IllegalStateException("First try fails"))
+        case "notfirst" => Success("Second try succeeds")
+      }
+
+      val url = Random.nextString(10)
+
+      cache.fetch(url, marshaller) should be(Success("Second try succeeds"))
     }
   }
 }

@@ -4,18 +4,14 @@ object Data {
   val cache = new Cache(fetch)
 
   def fetch[T](url: String, marshaller: String => Try[T]): T = {
-    def decoratedMarshaller(content: Try[String]): Try[T] = content match {
-      case Success(txt) =>      marshaller(txt).recoverWith {
-        case t => Failure(new IllegalStateException(s"Failed to marshall: ${t.getMessage}. Full text:\n$txt", t))
+    def decoratedMarshaller(content: String): Try[T] = {
+      marshaller(content).recoverWith {
+        case t => Failure(new IllegalStateException(s"Failed to marshall: ${t.getMessage}. Full text:\n$content", t))
       }
-      case Failure(f) => Failure(f)
     }
 
-    decoratedMarshaller(cache.fetch(url).recoverWith { case _ => fetch(url) }).recoverWith {
-      case _ => decoratedMarshaller(fetch(url))
-    }.recoverWith {
-      case _ => decoratedMarshaller(fetch(url))
-    }.recoverWith { case t => Failure(new IllegalStateException(s"Failed to marshall $url: ${t.getMessage}}", t)) }.get
+    cache.fetch(url, decoratedMarshaller)
+      .recoverWith { case t => Failure(new IllegalStateException(s"Failed to marshall $url: ${t.getMessage}}", t)) }.get
   }
 
   private def fetch(url: String): Try[String] = Try {
