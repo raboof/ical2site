@@ -1,23 +1,7 @@
-import java.nio.file.{Files, Paths}
-
 import scala.util._
 
 object Data {
-  object Cache {
-    val cacheDir = Paths.get("cache")
-    Files.createDirectories(cacheDir)
-
-    def fetch(url: String): Try[String] = {
-      val cp = cachePath(url);
-      if (Files.exists(cp)) Success(new String(Files.readAllBytes(cp), "UTF-8"))
-      else Failure(new IllegalStateException(s"Url $url not found in cache"))
-    }
-
-    def write(url: String, file: String) =
-      Files.write(cachePath(url), file.getBytes)
-
-    private def cachePath(url: String) = Paths.get("cache/" + url.replaceAll("/", "_"))
-  }
+  val cache = new Cache()
 
   def fetch[T](url: String, marshaller: String => Try[T]): T = {
     def decoratedMarshaller(content: Try[String]): Try[T] = content match {
@@ -27,7 +11,7 @@ object Data {
       case Failure(f) => Failure(f)
     }
 
-    decoratedMarshaller(Cache.fetch(url).recoverWith { case _ => fetch(url) }).recoverWith {
+    decoratedMarshaller(cache.fetch(url).recoverWith { case _ => fetch(url) }).recoverWith {
       case _ => decoratedMarshaller(fetch(url))
     }.recoverWith {
       case _ => decoratedMarshaller(fetch(url))
@@ -36,7 +20,7 @@ object Data {
 
   private def fetch(url: String): Try[String] = Try {
     val content = scala.io.Source.fromURL(resolvePlaceholders(url)).mkString
-    Cache.write(url, content)
+    cache.write(url, content)
     content
   }
 
