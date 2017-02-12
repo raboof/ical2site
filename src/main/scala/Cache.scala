@@ -3,10 +3,13 @@ import java.nio.file.attribute.FileTime
 import java.time.ZonedDateTime
 
 import scala.concurrent.duration._
-
 import scala.util.{Try, Success, Failure}
 
+import com.typesafe.scalalogging.Logger
+
 class Cache(generator: String => Try[String], expiration: Duration = 1 hour) {
+  val log = Logger(classOf[Cache])
+
   val cacheDir = Paths.get("cache")
   Files.createDirectories(cacheDir)
 
@@ -19,7 +22,11 @@ class Cache(generator: String => Try[String], expiration: Duration = 1 hour) {
       case Success((value, time)) if expired(time) =>
         generateAndMarshall(key, marshaller)
           .recoverWith { case _ => generateAndMarshall(key, marshaller) }
-          .recoverWith { case _ => marshaller(value) }
+          .recoverWith { case t => {
+              log.warn(s"Failed to process '$key', falling back to cached value", t)
+              marshaller(value)
+            }
+          }
       case Success((value, time)) =>
         marshaller(value)
           .recoverWith { case _ => generateAndMarshall(key, marshaller) }
