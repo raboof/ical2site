@@ -57,6 +57,7 @@ object Html {
     "<!DOCTYPE html>" + html(lang := language)(
       head(
         title(mainTitle + " | " + subtitle),
+        link(href := "/manifest.json", rel := "manifest"),
         link(href := "https://fonts.googleapis.com/css?family=Lobster%20Two%7CRaleway", rel := "stylesheet"),
         link(href := "style.css", rel := "stylesheet"),
         meta(name := "description", content := subtitle),

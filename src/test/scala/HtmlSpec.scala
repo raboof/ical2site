@@ -2,8 +2,12 @@ import java.io._
 import java.time.LocalDate
 
 import biweekly.component.VEvent
+
 import org.scalatest._
 import org.xml.sax.InputSource
+
+import spray.json._
+
 import nu.validator.validation._
 import nu.validator.xml._
 import nu.validator.source._
@@ -13,7 +17,7 @@ import nu.validator.servlet.imagereview._
 class HtmlSpec extends WordSpec with Matchers {
   "Rendering HTML" should {
     "produce valid HTML for the about page" in {
-      val html = Html.about(Config("Main title", "subtitle", "nl", List(source))).getBytes("UTF-8")
+      val html = Html.about(Config("Main title", "subtitle", "nl", JsObject(), List(source))).getBytes("UTF-8")
       validateHtml(html)
     }
 
