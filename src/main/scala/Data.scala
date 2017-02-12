@@ -1,17 +1,25 @@
 import scala.util._
 
+import com.typesafe.scalalogging.Logger
+
 object Data {
   val cache = new Cache(fetch)
+  val log = Logger("Data")
 
-  def fetch[T](url: String, marshaller: String => Try[T]): T = {
+  def fetch[T](url: String, marshaller: String => Try[T]): Option[T] = {
     def decoratedMarshaller(content: String): Try[T] = {
       marshaller(content).recoverWith {
         case t => Failure(new IllegalStateException(s"Failed to marshall: ${t.getMessage}. Full text:\n$content", t))
       }
     }
 
-    cache.fetch(url, decoratedMarshaller)
-      .recoverWith { case t => Failure(new IllegalStateException(s"Failed to marshall $url: ${t.getMessage}}", t)) }.get
+    cache.fetch(url, decoratedMarshaller) match {
+      case Success(value) => Some(value)
+      case Failure(cause) => {
+        log.warn(s"Failed to fetch '$url'", cause)
+        None
+      }
+    }
   }
 
   private def fetch(url: String): Try[String] = Try {

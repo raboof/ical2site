@@ -2,6 +2,7 @@ import java.nio.file.{Files, Paths, StandardCopyOption}
 import java.time._
 
 import scala.util._
+import scala.collection.GenSeq
 
 import biweekly.{Biweekly, ICalendar}
 import collection.JavaConverters._
@@ -29,18 +30,16 @@ object Main extends App {
       .getOrElse(Failure(new IllegalStateException(s"Could not parse calendar: $warnings")))
   }
 
-  val events: Seq[Event] = config.sources.par
-    .flatMap(source => {
-      val cal = Data.fetch(source.icalUrl, marshaller)
-      cal.getEvents.asScala.map(
-        event =>
-          Event(getDate(event.getDateStart.getValue),
-                source,
-                Option(event.getDescription).map(_.getValue).getOrElse(""),
-                Option(event.getUrl).map(_.getValue),
-                event))
-    })
-    .toList
+  val events: GenSeq[Event] = for {
+    source <- config.sources.par
+    cal <- Data.fetch(source.icalUrl, marshaller).toList
+    event <- cal.getEvents.asScala.map(event =>
+        Event(getDate(event.getDateStart.getValue),
+              source,
+              Option(event.getDescription).map(_.getValue).getOrElse(""),
+              Option(event.getUrl).map(_.getValue),
+              event)).toList
+  } yield event
 
   val outputDir = Paths.get("target/site")
   Files.createDirectories(outputDir)
@@ -48,6 +47,6 @@ object Main extends App {
     Files.copy(Paths.get("resources", file), Paths.get(outputDir.toString, file), StandardCopyOption.REPLACE_EXISTING))
 
   Files.write(Paths.get(outputDir.toString, "index.html"),
-              Html.list(config.mainTitle, config.subtitle, config.lang, events).getBytes("UTF-8"))
+              Html.list(config.mainTitle, config.subtitle, config.lang, events.toList).getBytes("UTF-8"))
   Files.write(Paths.get(outputDir.toString, "about.html"), Html.about(config).getBytes("UTF-8"))
 }
