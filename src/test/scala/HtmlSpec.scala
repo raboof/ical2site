@@ -22,12 +22,12 @@ class HtmlSpec extends WordSpec with Matchers {
     }
 
     "produce valid HTML for a list page without events" in {
-      val html = Html.list("Main title", "subtitle", "nl", List.empty).getBytes("UTF-8")
+      val html = Html.list("Main title", "subtitle", "nl", "red", List.empty).getBytes("UTF-8")
       validateHtml(html)
     }
 
     "produce valid HTML for a list page with one event" in {
-      val html = Html.list("Main title", "subtitle", "nl", List(event)).getBytes("UTF-8")
+      val html = Html.list("Main title", "subtitle", "nl", "red", List(event)).getBytes("UTF-8")
       validateHtml(html)
     }
 
