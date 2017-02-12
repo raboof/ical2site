@@ -72,5 +72,10 @@
     "name": "Geert Groote Huis",
     "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/geertgroote2ical",
     "siteUrl": "http://www.geertgrootehuis.nl/agenda/"
+  }, {
+    "tag": "EH",
+    "name": "Etty Hillesum Centrum",
+    "icalUrl": "http://www.ettyhillesumcentrum.nl/index.php?option=com_jevents&task=icals.export&format=ical&catids=0&years=0&k=38f31bbc7bff3bce9137ac0e5a56adc2",
+    "siteUrl": "http://www.ettyhillesumcentrum.nl"
   }]
 }
