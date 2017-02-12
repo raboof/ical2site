@@ -6,13 +6,14 @@ import scalatags.Text.tags2.title
 import scalatags.Text.TypedTag
 
 object Html {
-  def list(mainTitle: String, subtitle: String, language: String, events: Seq[Event]) =
-    page(mainTitle, subtitle, language, div(eventListHtml(events)))
+  def list(mainTitle: String, subtitle: String, language: String, themeColor: String, events: Seq[Event]) =
+    page(mainTitle, subtitle, language, themeColor, div(eventListHtml(events)))
 
   def about(config: Config) = page(
     config.mainTitle,
     config.subtitle,
     config.lang,
+    config.themeColor,
     div(style := "margin: 2em")(
       h2("Over deze site"),
       p(
@@ -53,7 +54,7 @@ object Html {
     )
   )
 
-  private def page(mainTitle: String, subtitle: String, language: String, bodyContent: TypedTag[_]*) =
+  private def page(mainTitle: String, subtitle: String, language: String, themeColor: String, bodyContent: TypedTag[_]*) =
     "<!DOCTYPE html>" + html(lang := language)(
       head(
         title(mainTitle + " | " + subtitle),
@@ -62,6 +63,7 @@ object Html {
         link(href := "style.css", rel := "stylesheet"),
         meta(name := "description", content := subtitle),
         meta(name := "viewport", content := "user-scalable=no"),
+        meta(name := "theme-color", content := themeColor),
         meta(attr("property") := "og:url", content := "https://deventer.live"),
         meta(attr("property") := "og:title", content := mainTitle),
         meta(attr("property") := "og:description", content := subtitle),

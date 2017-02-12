@@ -12,7 +12,8 @@ import DefaultJsonProtocol._
 
 object Main extends App {
   implicit val sourceFormat = jsonFormat4(Source)
-  implicit val configFormat = jsonFormat5(Config)
+  implicit val configFormat = jsonFormat6(Config)
+  implicit val webAppManifestFormat = jsonFormat3(WebAppManifest)
 
   val config =
     new String(Files.readAllBytes(Paths.get("resources", "deventer.live.json")), "UTF-8").parseJson.convertTo[Config]
@@ -47,9 +48,9 @@ object Main extends App {
     Files.copy(Paths.get("resources", file), Paths.get(outputDir.toString, file), StandardCopyOption.REPLACE_EXISTING))
 
   Seq(
-    "index.html" -> Html.list(config.mainTitle, config.subtitle, config.lang, events.toList),
+    "index.html" -> Html.list(config.mainTitle, config.subtitle, config.lang, config.themeColor, events.toList),
     "about.html" -> Html.about(config),
-    "manifest.json" -> config.manifest.prettyPrint
+    "manifest.json" -> WebAppManifest(config.backgroundColor, config.themeColor, start_url = "/").toJson.prettyPrint
   ).foreach { case (filename, content) =>
     Files.write(Paths.get(outputDir.toString, filename), content.getBytes("UTF-8"))
   }

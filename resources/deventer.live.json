@@ -2,11 +2,8 @@
   "mainTitle": "Deventer.live",
   "subtitle": "Concerten en activiteiten in Deventer",
   "lang": "nl",
-  "manifest": {
-    "background_color": "white",
-    "theme_color": "red",
-    "start_url": "/"
-  },
+  "backgroundColor": "white",
+  "themeColor": "red",
   "sources": [{
     "tag": "BWH",
     "name": "Burgerweeshuis",
