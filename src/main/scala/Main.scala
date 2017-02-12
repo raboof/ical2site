@@ -46,8 +46,11 @@ object Main extends App {
   Seq("style.css", ".htaccess", "favicon.ico", "ogimage_square.png").foreach(file =>
     Files.copy(Paths.get("resources", file), Paths.get(outputDir.toString, file), StandardCopyOption.REPLACE_EXISTING))
 
-  Files.write(Paths.get(outputDir.toString, "index.html"),
-              Html.list(config.mainTitle, config.subtitle, config.lang, events.toList).getBytes("UTF-8"))
-  Files.write(Paths.get(outputDir.toString, "about.html"), Html.about(config).getBytes("UTF-8"))
-  Files.write(Paths.get(outputDir.toString, "manifest.json"), config.manifest.prettyPrint.getBytes("UTF-8"))
+  Seq(
+    "index.html" -> Html.list(config.mainTitle, config.subtitle, config.lang, events.toList),
+    "about.html" -> Html.about(config),
+    "manifest.json" -> config.manifest.prettyPrint
+  ).foreach { case (filename, content) =>
+    Files.write(Paths.get(outputDir.toString, filename), content.getBytes("UTF-8"))
+  }
 }
