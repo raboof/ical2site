@@ -17,10 +17,12 @@ class Cache(generator: String => Try[String], expiration: Duration = 1 hour) {
   def fetch[T](key: String, marshaller: String => Try[T]): Try[T] = {
     fetch(key) match {
       case Success((value, time)) if expired(time) =>
-        // TODO recover with expired value
-        generator(key).flatMap(marshallAndWrite(key, _, marshaller))
+        generateAndMarshall(key, marshaller)
+          .recoverWith { case _ => generateAndMarshall(key, marshaller) }
+          .recoverWith { case _ => marshaller(value) }
       case Success((value, time)) =>
         marshaller(value)
+          .recoverWith { case _ => generateAndMarshall(key, marshaller) }
       case Failure(f) =>
         generateAndMarshall(key, marshaller)
           .recoverWith { case _ => generateAndMarshall(key, marshaller) }

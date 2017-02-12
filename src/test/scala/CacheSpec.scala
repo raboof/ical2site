@@ -57,5 +57,19 @@ class CacheSpec extends WordSpec with Matchers {
       cache.fetch(url, x => Success(x)) should be(Success("newlygenerated"))
     }
 
+    "use expired content when marshalling the newly generated content fails" in {
+      val cache = new Cache(_ => Success("newlygenerated"))
+      val url = Random.nextString(10)
+
+      val marshaller: String => Try[String] = {
+        case "newlygenerated" => Failure(new IllegalArgumentException("Marshalling the new value fails"))
+        case "old" => Success("but marshalling the old still works")
+      }
+
+      cache.write(url, "old", Some(ZonedDateTime.now().minusDays(3)))
+
+      cache.fetch(url, marshaller) should be(Success("but marshalling the old still works"))
+    }
+
   }
 }
