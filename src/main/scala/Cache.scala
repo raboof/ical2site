@@ -22,6 +22,7 @@ class Cache(generator: String => Try[String], expiration: Duration = 1 hour) {
       case Success((value, time)) if expired(time) =>
         generateAndMarshall(key, marshaller)
           .recoverWith { case _ => generateAndMarshall(key, marshaller) }
+          .recoverWith { case _ => generateAndMarshall(key, marshaller) }
           .recoverWith { case t => {
               log.warn(s"Failed to process '$key', falling back to cached value", t)
               marshaller(value)
@@ -30,8 +31,10 @@ class Cache(generator: String => Try[String], expiration: Duration = 1 hour) {
       case Success((value, time)) =>
         marshaller(value)
           .recoverWith { case _ => generateAndMarshall(key, marshaller) }
+          .recoverWith { case _ => generateAndMarshall(key, marshaller) }
       case Failure(f) =>
         generateAndMarshall(key, marshaller)
+          .recoverWith { case _ => generateAndMarshall(key, marshaller) }
           .recoverWith { case _ => generateAndMarshall(key, marshaller) }
     }
   }
