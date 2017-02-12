@@ -1,3 +1,5 @@
+import java.time.{ZonedDateTime}
+
 import scala.util.{Failure, Random, Success, Try}
 
 import org.scalatest._
@@ -45,5 +47,15 @@ class CacheSpec extends WordSpec with Matchers {
 
       cache.fetch(url, marshaller) should be(Success("Second try succeeds"))
     }
+
+    "retrieve content for which the cache is expired through the generator" in {
+      val cache = new Cache(_ => Success("newlygenerated"))
+      val url = Random.nextString(10)
+
+      cache.write(url, "old", Some(ZonedDateTime.now().minusDays(3)))
+
+      cache.fetch(url, x => Success(x)) should be(Success("newlygenerated"))
+    }
+
   }
 }
