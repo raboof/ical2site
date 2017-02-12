@@ -9,7 +9,7 @@ class DataSpec extends WordSpec with Matchers {
       val url = Random.nextString(10)
       Data.cache.write(url, content)
 
-      Data.fetch(url, x => Success(x)) should be(content)
+      Data.fetch(url, x => Success(x)) should be(Some(content))
     }
   }
 }
