@@ -1,10 +1,10 @@
-import java.nio.file.{Files, Paths, StandardCopyOption}
+import java.nio.file.{ Files, Paths, StandardCopyOption }
 import java.time._
 
 import scala.util._
 import scala.collection.GenSeq
 
-import biweekly.{Biweekly, ICalendar}
+import biweekly.{ Biweekly, ICalendar }
 import collection.JavaConverters._
 
 import spray.json._
@@ -37,11 +37,13 @@ object Main extends App {
     source <- config.sources.par
     cal <- Data.fetch(source.icalUrl, marshaller).toList
     event <- cal.getEvents.asScala.map(event =>
-        Event(getDate(event.getDateStart.getValue),
-              source,
-              Option(event.getDescription).map(_.getValue).getOrElse(""),
-              Option(event.getUrl).map(_.getValue),
-              event)).toList
+      Event(
+        getDate(event.getDateStart.getValue),
+        source,
+        Option(event.getDescription).map(_.getValue).getOrElse(""),
+        Option(event.getUrl).map(_.getValue),
+        event
+      )).toList
   } yield event
 
   val outputDir = Paths.get("target/site")
@@ -57,8 +59,10 @@ object Main extends App {
       config.mainTitle + " | " + config.subtitle,
       List(Icon("favicon.png", "image/png", "150x150")),
       config.backgroundColor,
-      config.themeColor, start_url = "/").toJson.prettyPrint
-  ).foreach { case (filename, content) =>
-    Files.write(Paths.get(outputDir.toString, filename), content.getBytes("UTF-8"))
-  }
+      config.themeColor, start_url = "/"
+    ).toJson.prettyPrint
+  ).foreach {
+      case (filename, content) =>
+        Files.write(Paths.get(outputDir.toString, filename), content.getBytes("UTF-8"))
+    }
 }

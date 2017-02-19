@@ -1,9 +1,9 @@
-import java.nio.file.{Files, Paths}
+import java.nio.file.{ Files, Paths }
 import java.nio.file.attribute.FileTime
 import java.time.ZonedDateTime
 
 import scala.concurrent.duration._
-import scala.util.{Try, Success, Failure}
+import scala.util.{ Try, Success, Failure }
 
 import com.typesafe.scalalogging.Logger
 
@@ -23,7 +23,8 @@ class Cache(generator: String => Try[String], expiration: Duration = 1 hour) {
         generateAndMarshall(key, marshaller)
           .recoverWith { case _ => generateAndMarshall(key, marshaller) }
           .recoverWith { case _ => generateAndMarshall(key, marshaller) }
-          .recoverWith { case t => {
+          .recoverWith {
+            case t => {
               log.warn(s"Failed to process '$key', falling back to cached value", t)
               marshaller(value)
             }

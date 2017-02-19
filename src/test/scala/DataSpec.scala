@@ -1,4 +1,4 @@
-import scala.util.{Success, Random}
+import scala.util.{ Success, Random }
 
 import org.scalatest._
 

@@ -41,9 +41,11 @@ object Html {
         a(href := "https://github.com/raboof/ical2site")("als gratis 'Open Source' software beschikbaar via GitHub"),
         "."
       ),
-      p("Heb je zelf deze kennis niet in huis, ",
+      p(
+        "Heb je zelf deze kennis niet in huis, ",
         a(href := "http://arnout.engelen.eu")("neem dan gerust contact op"),
-        ", wie weet kan ik helpen."),
+        ", wie weet kan ik helpen."
+      ),
       h3("Verbeteringen?"),
       p(
         "Er valt nog genoeg te verbeteren. Idee\u00ebn kun je posten als ",
