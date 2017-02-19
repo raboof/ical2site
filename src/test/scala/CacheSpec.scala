@@ -1,6 +1,6 @@
-import java.time.{ZonedDateTime}
+import java.time.{ ZonedDateTime }
 
-import scala.util.{Failure, Random, Success, Try}
+import scala.util.{ Failure, Random, Success, Try }
 
 import org.scalatest._
 

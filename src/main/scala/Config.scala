@@ -6,4 +6,5 @@ case class Config(
   lang: String,
   backgroundColor: String,
   themeColor: String,
-  sources: List[Source])
+  sources: List[Source]
+)
