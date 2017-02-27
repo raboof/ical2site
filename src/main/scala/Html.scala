@@ -95,7 +95,7 @@ object Html {
   private def eventListHtml(events: Seq[Event]) =
     events.filter(!_.startDate.isBefore(LocalDate.now())).groupBy(_.startDate).toList.sortBy(_._1).map {
       case (date, events) =>
-        div(
+        div(id := anchor(date))(
           h2(cls := "day")(formatDate(date)),
           div(cls := "date")(subDate(date)),
           events.groupBy(_.source).toList.map {
@@ -120,6 +120,7 @@ object Html {
         )
     }
 
+  private def anchor(date: LocalDate) = f"${date.getYear}${date.getMonth.ordinal + 1}%02d${date.getDayOfMonth}%02d"
   private def formatDate(date: LocalDate) = description(date)
   private def subDate(date: LocalDate) = s"${ofWeek(date)} $date"
 
