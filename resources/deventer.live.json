@@ -79,5 +79,10 @@
     "name": "Etty Hillesum Centrum",
     "icalUrl": "http://www.ettyhillesumcentrum.nl/index.php?option=com_jevents&task=icals.export&format=ical&catids=0&years=0&k=38f31bbc7bff3bce9137ac0e5a56adc2",
     "siteUrl": "http://www.ettyhillesumcentrum.nl"
+  }, {
+    "tag": "TL",
+    "name": "Tegenlist meetup",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=tegenlichtmeetupDeventer&token=FB_TOKEN",
+    "siteUrl": "https://www.facebook.com/tegenlichtmeetupDeventer/"
   }]
 }
