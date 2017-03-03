@@ -60,5 +60,5 @@ class HtmlSpec extends WordSpec with Matchers {
   val source = Source("ES", "Example Source", "http://source.example/example.ics", "http://source.example")
   val vevent = new VEvent()
   vevent.setSummary("Summary")
-  val event = Event(LocalDate.now, source, "Some description", None, vevent)
+  val event = Event(LocalDate.now, source, "Some description", "http://some.example", vevent)
 }
