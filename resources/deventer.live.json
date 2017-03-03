@@ -84,5 +84,10 @@
     "name": "Tegenlist meetup",
     "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=tegenlichtmeetupDeventer&token=FB_TOKEN",
     "siteUrl": "https://www.facebook.com/tegenlichtmeetupDeventer/"
+  }, {
+    "tag": "DV",
+    "name": "Deventer Verhaal",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=deventerverhaal&token=FB_TOKEN",
+    "siteUrl": "http://deventerverhaal.nl"
   }]
 }
