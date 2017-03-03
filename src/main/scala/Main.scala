@@ -41,7 +41,7 @@ object Main extends App {
         getDate(event.getDateStart.getValue),
         source,
         Option(event.getDescription).map(_.getValue).getOrElse(""),
-        Option(event.getUrl).map(_.getValue),
+        Option(event.getUrl).map(_.getValue).getOrElse(source.siteUrl),
         event
       )).toList
   } yield event

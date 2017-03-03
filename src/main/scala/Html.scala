@@ -110,7 +110,7 @@ object Html {
                       input(cls := "togglebox", `type` := "checkbox", id := uid),
                       span(cls := "evt-detail")(
                         span(cls := "evt-description")(s"${evt.description}"),
-                        evt.url.map(url => a(href := url)("site"))
+                        a(href := evt.url)("site")
                       )
                     )
                   )
