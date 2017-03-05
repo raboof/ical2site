@@ -94,5 +94,10 @@
     "name": "Filmhuis de Keizer",
     "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/fdk2ical",
     "siteUrl": "http://www.filmhuisdekeizer.nl/"
+  }, {
+    "tag": "DsG",
+    "name": "Deventer Songwriters Gilde",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=deventerverhaal&token=FB_TOKEN",
+    "siteUrl": "https://www.facebook.com/songwritersgildedeventer"
   }]
 }
