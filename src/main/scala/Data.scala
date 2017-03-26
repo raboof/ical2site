@@ -23,9 +23,7 @@ object Data {
   }
 
   private def fetch(url: String): Try[String] = Try {
-    val content = scala.io.Source.fromURL(resolvePlaceholders(url)).mkString
-    cache.write(url, content)
-    content
+    scala.io.Source.fromURL(resolvePlaceholders(url)).mkString
   }
 
   private def resolvePlaceholders(url: String): String = {
