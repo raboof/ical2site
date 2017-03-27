@@ -99,5 +99,10 @@
     "name": "Deventer Songwriters Gilde",
     "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=deventerverhaal&token=FB_TOKEN",
     "siteUrl": "https://www.facebook.com/songwritersgildedeventer"
+  }, {
+    "tag": "F",
+    "name": "De Fabriek",
+    "icalUrl": "https://www.fabriekdeventer.nl/activiteiten/agenda/events.ics",
+    "siteUrl": "https://www.fabriekdeventer.nl"
   }]
 }

@@ -33,17 +33,24 @@ object Main extends App {
       .getOrElse(Failure(new IllegalStateException(s"Could not parse calendar: $warnings")))
   }
 
+  def extractEvents(source: Source, events: Seq[biweekly.component.VEvent]): Seq[Event] = {
+    val recurringSummaries = events.groupBy(_.getSummary).filter(_._2.size > 4).map(_._2.head.getSummary).toList
+    events
+      .filter(event => !recurringSummaries.contains(event.getSummary))
+      .map(event =>
+        Event(
+          getDate(event.getDateStart.getValue),
+          source,
+          Option(event.getDescription).map(_.getValue).getOrElse(""),
+          Option(event.getUrl).map(_.getValue).getOrElse(source.siteUrl),
+          event
+        )).toList
+  }
+
   val events: GenSeq[Event] = for {
     source <- config.sources.par
     cal <- Data.fetch(source.icalUrl, marshaller).toList
-    event <- cal.getEvents.asScala.map(event =>
-      Event(
-        getDate(event.getDateStart.getValue),
-        source,
-        Option(event.getDescription).map(_.getValue).getOrElse(""),
-        Option(event.getUrl).map(_.getValue).getOrElse(source.siteUrl),
-        event
-      )).toList
+    event <- extractEvents(source, cal.getEvents.asScala)
   } yield event
 
   val outputDir = Paths.get("target/site")
