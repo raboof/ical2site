@@ -22,8 +22,8 @@
   }, {
     "tag": "BK",
     "name": "Bouwkunde",
-    "icalUrl": "http://www.theaterbouwkunde.nl/programma/events.ics",
-    "siteUrl": "http://www.theaterbouwkunde.nl"
+    "icalUrl": "https://www.theaterbouwkunde.nl/programma/events.ics",
+    "siteUrl": "https://www.theaterbouwkunde.nl"
   }, {
     "tag": "VVV",
     "name": "VVV Deventer",
