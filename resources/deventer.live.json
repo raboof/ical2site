@@ -97,7 +97,7 @@
   }, {
     "tag": "DsG",
     "name": "Deventer Songwriters Gilde",
-    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=deventerverhaal&token=FB_TOKEN",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=songwritersgildedeventer&token=FB_TOKEN",
     "siteUrl": "https://www.facebook.com/songwritersgildedeventer"
   }, {
     "tag": "F",
