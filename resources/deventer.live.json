@@ -114,5 +114,10 @@
     "name": "Deventer 1250",
     "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=Deventer1250&token=FB_TOKEN",
     "siteUrl": "http://deventer1250.nl/"
+  }, {
+    "tag": "VO",
+    "name": "Vondst",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=VONDSTDEVENTER&token=FB_TOKEN",
+    "siteUrl": "https://www.facebook.com/VONDSTDEVENTER/"
   }]
 }
