@@ -119,5 +119,10 @@
     "name": "Vondst",
     "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=VONDSTDEVENTER&token=FB_TOKEN",
     "siteUrl": "https://www.facebook.com/VONDSTDEVENTER/"
+  }, {
+    "tag": "NO",
+    "name": "De Nieuwe Oost",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=DeNieuweOostPopmuziek&token=FB_TOKEN",
+    "siteUrl": "https://denieuweoost.nl/"
   }]
 }
