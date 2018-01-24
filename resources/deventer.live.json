@@ -124,5 +124,10 @@
     "name": "De Nieuwe Oost",
     "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=DeNieuweOostPopmuziek&token=FB_TOKEN",
     "siteUrl": "https://denieuweoost.nl/"
+  }, {
+    "tag": "AR",
+    "name": "Architectuurcentrum Rondeel",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=rondeeldeventer&token=FB_TOKEN",
+    "siteUrl": "http://www.rondeeldeventer.nl/"
   }]
 }
