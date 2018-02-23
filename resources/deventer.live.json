@@ -125,9 +125,19 @@
     "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=DeNieuweOostpop&token=FB_TOKEN",
     "siteUrl": "https://denieuweoost.nl/"
   }, {
+    "tag": "KD",
+    "name": "Klassieke Muziek Deventer",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=klassiekemuziekdeventer&token=FB_TOKEN",
+    "siteUrl": "http://www.klassiekemuziekdeventer.nl/"
+  }, {
     "tag": "AR",
     "name": "Architectuurcentrum Rondeel",
     "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=rondeeldeventer&token=FB_TOKEN",
     "siteUrl": "http://www.rondeeldeventer.nl/"
+  }, {
+    "tag": "FE",
+    "name": "De Fermerie",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=DeFermerieDeventer&token=FB_TOKEN",
+    "siteUrl": "http://www.fermerie.nl/"
   }]
 }
