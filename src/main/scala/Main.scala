@@ -34,7 +34,7 @@ object Main extends App {
   }
 
   def extractEvents(source: Source, events: Seq[biweekly.component.VEvent]): Seq[Event] = {
-    val recurringSummaries = events.groupBy(_.getSummary).filter(_._2.size > 4).map(_._2.head.getSummary).toList
+    val recurringSummaries = events.groupBy(_.getSummary).filter(_._2.size >= 3).map(_._2.head.getSummary).toList
     events
       .filter(event => !recurringSummaries.contains(event.getSummary))
       .map(event =>

@@ -37,14 +37,14 @@ object Html {
       h3("Ook zo'n site?"),
       p("Wil je voor jouw community ook een site zoals deze?"),
       p(
-        "Ben je zelf handig met software, ga dan gerust je gang: alle code achter deze site is ",
+        "Ben je zelf handig met software, ga dan gerust je gang: alle software waar deze site op draait is ",
         a(href := "https://github.com/raboof/ical2site")("als gratis 'Open Source' software beschikbaar via GitHub"),
         "."
       ),
       p(
-        "Heb je zelf deze kennis (nog) niet in huis, ",
+        "Heb je zelf deze kennis niet in huis, ",
         a(href := "http://arnout.engelen.eu")("neem dan gerust contact op"),
-        ": wie weet kan ik helpen."
+        ", wie weet kan ik helpen."
       ),
       h3("Verbeteringen?"),
       p(

@@ -133,7 +133,12 @@
     "tag": "AR",
     "name": "Architectuurcentrum Rondeel",
     "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/facebook?page_id=rondeeldeventer&token=FB_TOKEN",
-    "siteUrl": "http://www.rondeeldeventer.nl/"
+    "siteUrl": "https://www.rondeeldeventer.nl/"
+  }, {
+    "tag": "OB",
+    "name": "Openbare Bibliotheek",
+    "icalUrl": "https://bymo5ipzgg.execute-api.eu-west-1.amazonaws.com/prod/obdeventer2ical",
+    "siteUrl": "https://www.obdeventer.nl/agenda1"
   }, {
     "tag": "FE",
     "name": "De Fermerie",
